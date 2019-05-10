@@ -16,6 +16,7 @@ pipeline {
         sh "echo 'y' | sudo docker system prune"
         sh "sudo docker-compose up -d"
         sh "seckey=\$(sudo docker-compose run --rm sentry config generate-secret-key)"
+        sh "echo 'SENTRY_SECRET_KEY=\$seckey' >> .variables"
         sh "echo 'Y jacek.hewko@gmail.com testpass testpass y' | sudo docker-compose run --rm sentry upgrade"
       }
     }
