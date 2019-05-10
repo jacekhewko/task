@@ -15,7 +15,7 @@ pipeline {
         pwd
         sudo service docker restart
         echo 'y' | sudo docker system prune
-        sudo docker-compose up -d && seckey=\$(sudo docker-compose run --rm sentry config generate-secret-key) && echo "SENTRY_SECRET_KEY=\$seckey" >> .variables && echo "Y jacek.hewko@gmail.com testpass testpass y" | sudo docker-compose run --rm sentry upgrade
+        sudo docker-compose up -d && SENTRY_SECRET_KEY=\$(sudo docker-compose run --rm sentry config generate-secret-key) && echo "Y jacek.hewko@gmail.com testpass testpass y" | sudo docker-compose run --rm sentry upgrade
         """
       }
     }
