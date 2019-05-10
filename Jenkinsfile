@@ -3,28 +3,23 @@ pipeline {
   stages {
     stage('Cloning Git') {
       steps {
-        git 'https://twoje@repo.org/dupa/test.git'
+        git 'https://github.com/jacekhewko/tooploox.git'
       }
     }
     stage('Building image') {
       steps{
-        script {
-          dockerImage = docker.build registry + ":$BUILD_NUMBER"
-        }
+        sh "docker-compose up -d && seckey=$(docker-compose run --rm sentry config generate-secret-key) && echo "Y jacek.hewko@gmail.com testpass testpass y" | docker-compose run --rm sentry upgrade"
       }
     }
-    stage('Deploy Image') {
+    stage('Test') {
       steps{
-        script {
-          docker.withRegistry( '', registryCredential ) {
-            dockerImage.push()
-          }
+        echo "test"
         }
       }
     }
     stage('Remove Unused docker image') {
       steps{
-        sh "docker rmi $registry:$BUILD_NUMBER"
+        echo "test"
       }
     }
   }
