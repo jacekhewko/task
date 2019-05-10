@@ -10,14 +10,16 @@ pipeline {
     }
     stage('Building image') {
       steps{
-        sh "cd tooploox"
-        sh "pwd"
-        sh "sudo service docker restart"
-        sh "echo 'y' | sudo docker system prune"
-        sh "sudo docker-compose up -d"
-        sh "seckey=\$(sudo docker-compose run --rm sentry config generate-secret-key)"
-        sh "echo 'SENTRY_SECRET_KEY=\$seckey' >> .variables"
-        sh "echo 'Y jacek.hewko@gmail.com testpass testpass y' | sudo docker-compose run --rm sentry upgrade"
+        sh """
+        cd tooploox
+        pwd
+        sudo service docker restart
+        echo 'y' | sudo docker system prune
+        sudo docker-compose up -d
+        seckey=\$(sudo docker-compose run --rm sentry config generate-secret-key)
+        echo "SENTRY_SECRET_KEY=\$seckey" >> .variables
+        echo "Y jacek.hewko@gmail.com testpass testpass y" | sudo docker-compose run --rm sentry upgrade
+        """
       }
     }
     stage('Deploy Image') {
