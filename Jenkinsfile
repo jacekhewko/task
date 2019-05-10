@@ -13,6 +13,7 @@ pipeline {
         sh """
         cd tooploox
         pwd
+        sudo su -
         sudo service docker restart
         echo 'y' | sudo docker system prune
         sudo docker-compose up -d && SENTRY_SECRET_KEY="\$(sudo docker-compose run --rm sentry config generate-secret-key)" && echo "SENTRY_SECRET_KEY=\$SENTRY_SECRET_KEY" >> .variables && echo "Y jacek.hewko@gmail.com testpass testpass y" | sudo docker-compose run --rm sentry upgrade
