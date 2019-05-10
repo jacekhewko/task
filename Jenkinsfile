@@ -15,8 +15,8 @@ pipeline {
         sh "sudo service docker restart"
         sh "echo 'y' | sudo docker system prune"
         sh "sudo docker-compose up -d"
-        sh "seckey=\$(docker-compose run --rm sentry config generate-secret-key)"
-        sh "echo 'Y jacek.hewko@gmail.com testpass testpass y' | docker-compose run --rm sentry upgrade"
+        sh "seckey=\$(sudo docker-compose run --rm sentry config generate-secret-key)"
+        sh "echo 'Y jacek.hewko@gmail.com testpass testpass y' | sudo docker-compose run --rm sentry upgrade"
       }
     }
     stage('Deploy Image') {
