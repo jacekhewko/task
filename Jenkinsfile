@@ -4,6 +4,7 @@ pipeline {
     stage('Cloning Git') {
       steps {
         sh 'cd /'
+        sh 'sudo rm -rf tooploox'
         sh 'git clone https://github.com/jacekhewko/tooploox.git'
       }
     }
