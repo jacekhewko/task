@@ -10,7 +10,9 @@ pipeline {
     }
     stage('Building image') {
       steps{
-        sh "docker-compose up -d"
+        sh "cd tooploox"
+        sh "sudo service docker start"
+        sh "sudo docker-compose up -d"
         sh "seckey=\$(docker-compose run --rm sentry config generate-secret-key)"
         sh "echo 'Y jacek.hewko@gmail.com testpass testpass y' | docker-compose run --rm sentry upgrade"
       }
