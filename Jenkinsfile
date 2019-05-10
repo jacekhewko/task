@@ -3,7 +3,8 @@ pipeline {
   stages {
     stage('Cloning Git') {
       steps {
-        git 'https://github.com/jacekhewko/tooploox.git'
+        sh 'cd /'
+        sh 'git clone https://github.com/jacekhewko/tooploox.git'
       }
     }
     stage('Building image') {
