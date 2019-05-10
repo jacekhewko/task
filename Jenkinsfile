@@ -11,16 +11,13 @@ pipeline {
         sh "docker-compose up -d && seckey=$(docker-compose run --rm sentry config generate-secret-key) && echo "Y jacek.hewko@gmail.com testpass testpass y" | docker-compose run --rm sentry upgrade"
       }
     }
-    stage('Test') {
+    stage('Deploy Image') {
       steps{
         echo "test"
-        }
       }
     }
     stage('Remove Unused docker image') {
-      steps{
         echo "test"
-      }
     }
   }
 }
