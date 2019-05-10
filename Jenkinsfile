@@ -6,15 +6,13 @@ pipeline {
         sh 'cd /'
         sh 'sudo rm -rf tooploox'
         sh 'git clone https://github.com/jacekhewko/tooploox.git'
-        sh "pwd"
       }
     }
     stage('Building image') {
       steps{
         sh "cd tooploox"
         sh "pwd"
-        sh "sudo service docker start"
-        sh "sudo docker kill \$(sudo docker ps -q)"
+        sh "sudo service docker restart"
         sh "sudo docker-compose up -d"
         sh "seckey=\$(docker-compose run --rm sentry config generate-secret-key)"
         sh "echo 'Y jacek.hewko@gmail.com testpass testpass y' | docker-compose run --rm sentry upgrade"
