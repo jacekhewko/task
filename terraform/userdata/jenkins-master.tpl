@@ -8,6 +8,5 @@ sudo usermod -a -G sudo jenkins
 sudo service docker start
 sudo service docker enable
 sudo sh /tmp/install-plugins.sh $(echo $(cat /tmp/plugins.txt))
-sudo curl http://${jenkins_url}:8080/jnlpJars/jenkins-cli.jar -o /tmp/jenkins-cli.jar
-sudo java -jar /tmp/jenkins-cli.jar -s http://${jenkins_url}:8080 create-job tooploox-sentry < /tmp/config.xml
+sudo java -jar /var/cache/jenkins/war/WEB-INF/jenkins-cli.jar -s http://localhost:8080 create-job tooploox-sentry < /tmp/job.xml
 sudo service jenkins restart
