@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('Cloning Git') {
       steps {
-        sh 'sudo rm -rf sentry-docker-compose'
+        sh 'sudo rm -rf tooploox'
         sh 'git clone https://github.com/jacekhewko/tooploox.git'
       }
     }
@@ -11,7 +11,7 @@ pipeline {
       steps{
         sh """
         sudo service docker restart
-        cd sentry-docker-compose
+        cd tooploox
         sudo cp .env.sample .env
         seckey=\$(sudo docker-compose run --rm sentry config generate-secret-key)
         sudo echo "SENTRY_SECRET_KEY=\$seckey" | sudo tee -a .variables > /dev/null
