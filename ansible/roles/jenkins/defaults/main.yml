@@ -1,0 +1,7 @@
+jenkins_admin: "admin"
+jenkins_password: "admin!!"
+jenkins_port: "8080"
+jenkins_url: "http://127.0.0.1"
+
+jenkins_config_owner: "jenkins"
+jenkins_config_group: "jenkins"

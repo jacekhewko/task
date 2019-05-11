@@ -1,0 +1,101 @@
+
+
+############################################################################
+##                            Jenkins                                    ### 
+############################################################################
+
+- name: "Create Jenkins group"
+  group:
+    name: "{{ jenkins_config_group }}"
+    state: present
+
+- name: "Create Jenkins user"
+  user:
+    name: "{{ jenkins_config_owner }}"
+    groups: "{{ jenkins_config_group }}"
+    state: present
+
+- name: Allow 'jenkins' group to have passwordless sudo
+  lineinfile:
+    dest: /etc/sudoers
+    state: present
+    regexp: '^%jenkins'
+    line: 'jenkins ALL=(ALL) NOPASSWD: ALL'
+    validate: 'visudo -cf %s'
+
+- name: Add sudoers users to jenkins group
+  user: 
+    name: jenkins 
+    groups: jenkins 
+    append: yes 
+    state: present 
+    createhome: yes
+
+- name: Ensure java-1.7.0-openjdk is removed
+  yum:
+    name: "{{ packages }}"
+    state: absent
+    update_cache: true
+  vars:
+    packages:
+    - "java-1.7.0-openjdk"
+    - "git"
+
+
+- name: Install Java 8 using YUM.
+  yum:
+    name: "{{java.VERSION}}"
+    state: latest  
+  become: true
+
+- name: Download Jenkins repo yum URL for  
+  get_url:
+    url: "{{jenkins.repo_URL}}"
+    dest: /etc/yum.repos.d/jenkins.repo
+  become: true
+
+- name: Import GPG Key
+  rpm_key:
+    state: present
+    key: "{{jenkins.gpg_key}}"
+
+- name: Install Jenkins
+  yum:
+    name: jenkins
+    state: present
+
+## this is option which turn off configure jenkins setting (login, password, plugins etc)
+
+- name: Change Jenkins JAVA options
+  lineinfile: 
+    dest=/etc/sysconfig/jenkins
+    regexp=^JENKINS_JAVA_OPTIONS=
+    line=JENKINS_JAVA_OPTIONS="{{ jenkins.JAVA_OPTIONS }}"
+  become: true
+
+- name: Start Jenkins service and enable on boot
+  service:
+    name: jenkins
+    state: started
+    enabled: yes
+
+- name: "Check if Jenkins is running"
+  uri:
+    url: "{{ jenkins_url }}:{{ jenkins_port }}"
+    status_code: 200
+  register: result
+  until: result.status == 200
+  retries: 60
+  delay: 1
+
+- name: install basic plugins for jenkins
+  copy: 
+    src: "{{ item }}"
+    owner: jenkins
+    group: jenkins
+    mode: 0600
+    dest: "/tmp/"
+  with_items:
+   - plugins.txt
+   - install-plugins.sh
+   - key

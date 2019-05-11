@@ -1,0 +1,12 @@
+
+## JENKINS VARS ##
+
+java:
+  VERSION: "java-1.8.0-openjdk"
+
+
+jenkins:
+  repo_URL: "http://pkg.jenkins-ci.org/redhat/jenkins.repo"
+  gpg_key: "https://jenkins-ci.org/redhat/jenkins-ci.org.key"
+  JAVA_OPTIONS: "-Djava.awt.headless=true -Djenkins.install.runSetupWizard=false"
+  

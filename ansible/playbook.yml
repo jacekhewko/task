@@ -1,0 +1,6 @@
+- name: "Configure ami"
+  hosts: all
+  become: yes
+  become_user: root
+  roles:
+    - jenkins

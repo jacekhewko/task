@@ -1,0 +1,23 @@
+{
+    "provisioners": [
+      {
+        "type": "ansible",
+        "playbook_file": "ansible/playbook-slave.yml"
+      }
+    ],
+
+    "builders": [
+      {
+          "type": "amazon-ebs",
+          "profile": "tooploox-jaceks-task",
+          "region": "eu-west-1",
+          "source_ami": "ami-08935252a36e25f85",
+          "instance_type": "t2.micro",
+          "ssh_username": "ec2-user",
+          "ami_name": "jenkins-slave-ami",
+          "tags": {
+            "Name": "jenkins-slave-ami"
+          }
+      }
+    ]
+  }
