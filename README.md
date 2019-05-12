@@ -27,7 +27,7 @@ Rozwiązanie docelowo jest deployowane na AWS w regionie Irlandia, korzystając 
 7. `make destroy`
 
 ## Cechy rozwiązania
-- Packer tworzy AMI Jenkins Master oraz Jenkins Slave, przy pomocy Ansible
+- Packer tworzy obraz Jenkins Master oraz Jenkins Slave przy pomocy Ansible oraz wysyła je do AWS AMIs
 - Terraform buduje środowisko pod Jenkinsa oraz 3 instancje Jenkinsowe, z automatycznym użyciem AMI wypieczonych dzięki Packerowi
 - Jenkins wstaje z automatycznie zainstalowanymi wtyczkami zdefiniowanymi w `ansible/roles/jenkins/files/plugins.txt`
 - Jenkins wstaje z automatycznie podłączonymi workerami (`ansible/roles/slave/files/join-master.sh`)
