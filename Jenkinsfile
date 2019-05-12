@@ -7,28 +7,22 @@ pipeline {
         sh 'git clone https://github.com/jacekhewko/tooploox.git'
       }
     }
-    stage('Building image') {
+    stage('Configuring and Deploying Sentry') {
       steps{
         sh """
-        sudo service docker restart
         cd tooploox
         sudo cp .env.sample .env
         seckey=\$(sudo docker-compose run --rm sentry config generate-secret-key)
         sudo echo "SENTRY_SECRET_KEY=\$seckey" | sudo tee -a .variables > /dev/null
-        sudo echo "Y jacek.hewko@gmail.com testpass testpass y" | sudo docker-compose run --rm sentry upgrade
+        sudo echo "N" | sudo docker-compose run --rm sentry upgrade
         sudo docker-compose run --rm sentry createuser --email test@account.pl --password justatest --superuser
         sudo docker-compose up -d
         """
       }
     }
-    stage('Deploy Image') {
+    stage('Building image') {
       steps{
-        echo "test"
-      }
-    }
-    stage('Remove Unused docker image') {
-      steps{
-        echo "test"
+        echo "TO DO"
       }
     }
   }
