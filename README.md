@@ -20,7 +20,7 @@ Rozwiązanie docelowo jest deployowane na AWS w regionie Irlandia, korzystając 
 
 1. `make init`
 2. `make apply`
-3. **Warto dać Jenkinsowi około 5. minut** aby wszystkie skrypty zainicjalizowały się w tle, oraz aby slave zdążyły dodać się do puli
+3. **Warto dać Jenkinsowi około 5. minut** aby wszystkie skrypty zainicjalizowały się w tle, oraz aby slave nody zdążyły dodać się do puli
 4. Wejść w URL Jenkinsa (podanego przez terraform outputs) -> Odpalić job `tooploox-sentry1`
 5. Wejść w URL General Builds Slave na port 9000 (adres został podany wcześniej przez terraform outputs)
 6. Można zalogować się do Sentry jako `test@account.pl`, pass: `justatest`
