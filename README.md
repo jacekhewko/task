@@ -27,15 +27,17 @@ Rozwiązanie docelowo jest deployowane na AWS w regionie Irlandia, korzystając 
 7. `make destroy`
 
 ## Cechy rozwiązania
-- Packer tworzy AMI Jenkins mastera oraz slave przy pomocy Ansible
-- Jenkins wstaje z automatycznie zainstalowanymi wtyczkami
-- Jenkins wstaje z automatycznie podłączonymi workerami
-- Jenkins wstaje z istniejącym, predefiniowanym Jobem
-- Terraform tworzy środowisko pod Jenkinsa oraz 3 instancje Jenkinsowe, z automatycznym użyciem AMI wypieczonych dzięki Packerowi
+- Packer tworzy AMI Jenkins Master oraz Jenkins Slave, przy pomocy Ansible
+- Terraform buduje środowisko pod Jenkinsa oraz 3 instancje Jenkinsowe, z automatycznym użyciem AMI wypieczonych dzięki Packerowi
+- Jenkins wstaje z automatycznie zainstalowanymi wtyczkami zdefiniowanymi w `ansible/roles/jenkins/files/plugins.txt`
+- Jenkins wstaje z automatycznie podłączonymi workerami (`ansible/roles/slave/files/join-master.sh`)
+- Jenkins wstaje z istniejącym, predefiniowanym Jobem (`job.xml` zainicjowany w user data przez jenkins-cli.jar)
+- Job `tooploox-sentry` wykonuje polecenia zdefiniowane w tym repo w `Jenkinsfile` przy pomocy modułu Pipeline
+- Aplikacja Sentry zostaje wydeployowana do kontenerów wraz z Redisem oraz PostgreSQL za pomocą docker-compose
 
 ## TODO list
 ### (docelowo chciałbym aby tak funkcjonowało to rozwiązanie, jednak jest to niemożliwe ze względu na ograniczony czas jaki mogę obecnie poświęcić na to zadanie)
-- Udoskonalenie Jobów oraz Pipelinów (m. inn. zapisanie obrazu apki do własnego repo po jej wkonfugurowaniu)
+- Udoskonalenie pipeline (m. inn. zapisanie obrazu apki do własnego repo po jej wkonfugurowaniu)
 - Wydeployowanie tej aplikacji do Elastic Container Service na AWS, wykorzystując również ECR
 - Slavy Jenkinsa w autoscaling grupie
 - Możliwość wydeployowania rowiązania w dowolnym regionie bez koniecznośći grzebania w kodzie (w tej chwili należy podmienić region wraz z AMI ID w `packer/jenkins.json` orac `packer/slave.json` oraz w `terraform/config.tf`)
