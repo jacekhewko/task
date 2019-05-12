@@ -1,12 +1,12 @@
 ## Hej Tooploox! :)
 
-Na wstępie chcę podziękować za interesujące zadanie. O dziwo nie miałem templatek na Jenkinsa więc byłem zmuszony nieco ruszyć głową i napisać wszystko po raz pierwszy. I bardzo się z tego powodu cieszę.
+Na wstępie chcę podziękować za interesujące zadanie. O dziwo nie miałem przydatnych templatek więc byłem zmuszony nieco ruszyć głową i napisać 90% kodu od zera. I bardzo się z tego powodu cieszę.
 
-Muszę zaznaczyć, że miałem naprawdę mało czasu na wykonanie tego zadania (40 minut dziennie to max mojego wolnego czasu w tym momencie, a weekendy odpadają, ponieważ jestem najczęściej w podróży) - co nie zmienia faktu, że sprawiło mi to przyjemność.
+Muszę zaznaczyć, że miałem naprawdę mało czasu na wykonanie tego zadania (30 minut dziennie to max mojego wolnego czasu w tym momencie) - co nie zmienia faktu, że sprawiło mi to przyjemność.
 
 Z tego też powodu nie wszystko jest tak rozwiązane, jakbym sobie tego życzył (patrz: TODO list). W tym momencie aplikacja jest deployowana w dockerze stojącym na jednym z workerów Jenkinsa. Do stu procentowej automatyzacji tego rozwiązania brakuje niewiele, ale potrzeba na to więcej czasu.
 
-To rozwiązanie nie zawsze jest zgodne z ogólnymi zasadami bezpieczeństwa oraz nie zawsze wpasowuje się w konwencję best practice. Jako, że jest to zadanie rekrutacyjne, moim głównym celem było zrobienie tego tak, aby móc zaprezentować Wam to w jak najprostszy sposób - stąd część rzeczy nie jest zabezpieczonych hasłem, inne rzeczy są nieco uproszczone, a jeszcze gdzie indziej hasła mogą być widoczne "na zewnątrz" - właśnie ze względu na to, że jest to tylko i wyłącznie "prezentacja" i nigdy nie powinna w takiej formie trafić na "produkcję".
+To rozwiązanie nie zawsze jest zgodne z ogólnymi zasadami bezpieczeństwa z premedytacją, oraz nie zawsze wpasowuje się w konwencję best practice. Jako, że jest to zadanie rekrutacyjne, moim głównym celem było zrobienie tego tak, aby móc zaprezentować Wam to w jak najprostszy sposób - stąd część rzeczy nie jest zabezpieczonych hasłem, inne rzeczy są nieco uproszczone, a jeszcze gdzie indziej hasła mogą być widoczne "na zewnątrz" - właśnie ze względu na to, że jest to tylko i wyłącznie "prezentacja" i nigdy nie powinna w takiej formie trafić na "produkcję".
 
 ## Wymagania
 - aws cli
@@ -16,9 +16,11 @@ To rozwiązanie nie zawsze jest zgodne z ogólnymi zasadami bezpieczeństwa oraz
 - git
 
 ## Krótka instrukcja
+Rozwiązanie docelowo jest deployowane na AWS w regionie Irlandia, korzystając z kluczy podanych przy konfiguracji nowego profilu (`make init` uruchamia między innymi `aws configure`). Zabrakło czasu na mapping i automatyzację wszystkich regionów. Nadal można to zmienić ręcznie (patrz: TODO list).
+
 1. `make init`
 2. `make apply`
-3. poczekać około 5. minut aby wszystkie skrypty się zainicjalizowały oraz aby slavy dodały się do puli Jenkinsa
+3. Poczekać około 5. minut aby wszystkie skrypty się zainicjalizowały oraz aby slavy dodały się do puli Jenkinsa
 4. <jenkins_master_ip>:8080 -> run Tooploox job (twice if first one failed)
 5. <jenkins_general_build_slave_ip>:9000
 
