@@ -33,6 +33,7 @@ Rozwiązanie docelowo jest deployowane na AWS w regionie Irlandia, korzystając 
 - Jenkins wstaje z automatycznie podłączonymi workerami (`ansible/roles/slave/files/join-master.sh`)
 - Jenkins wstaje z istniejącym, predefiniowanym Jobem (`job.xml` zainicjowany w user data przez jenkins-cli.jar)
 - Job `tooploox-sentry` wykonuje polecenia zdefiniowane w tym repo w `Jenkinsfile` przy pomocy modułu Pipeline
+- Podstawowa konfiguracja aplikacji Sentry w pipelinie
 - Aplikacja Sentry zostaje wydeployowana do kontenerów wraz z Redisem oraz PostgreSQL za pomocą docker-compose (przy użyciu `docker-compose.yml` z tego repo)
 
 ## TODO list
