@@ -16,7 +16,3 @@ destroy:
 	terraform destroy -auto-approve && \
 	echo "Please remember to manually deregister two Jenkins AMIs created by 'make init'! Didn't have time to automate that :)" && \
 	cd -
-
-packer:
-	packer build packer/jenkins.json && \
-	packer build packer/slave.json

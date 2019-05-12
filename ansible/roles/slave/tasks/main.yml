@@ -13,3 +13,4 @@
     dest: "/tmp/"
   with_items:
    - join-master.sh
+   - job.xml
