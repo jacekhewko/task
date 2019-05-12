@@ -20,9 +20,9 @@ Rozwiązanie docelowo jest deployowane na AWS w regionie Irlandia, korzystając 
 
 1. `make init`
 2. `make apply`
-3. Poczekać około 5. minut aby wszystkie skrypty się zainicjalizowały oraz aby slavy dodały się do puli Jenkinsa
-4. <jenkins_master_ip>:8080 -> run `tooploox-sentry` job (trzeba puścić tego joba dwukrotnie jeśli po pierwszej próbie był fail)
-5. <jenkins_general_build_slave_ip>:9000
+3. *Należy dać Jenkinsowi około 5. minut aby wszystkie skrypty zainicjalizowały się w tle, oraz aby slave nody dodały się do puli Jenkinsa*
+4. Wejść w URL Jenkinsa (podanego przez terraform outputs) -> Odpalić job `tooploox-sentry` (trzeba puścić tego joba dwukrotnie jeśli po pierwszej próbie był fail)
+5. Wejść w URL General Builds Slave na port 9000 (adres został podany wcześniej przez terraform outputs)
 6. Można zalogować się do Sentry jako `test@account.pl`, pass: `justatest`
 7. `make destroy`
 
