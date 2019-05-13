@@ -41,6 +41,6 @@ Rozwiązanie docelowo jest deployowane na AWS w regionie Irlandia, korzystając 
 - Udoskonalenie pipeline (m. inn. zapisanie obrazu apki do własnego Docker Registry po jej wkonfugurowaniu)
 - Wydeployowanie tej aplikacji do Elastic Container Service na AWS, wykorzystując również ECR
 - Slavy Jenkinsa w autoscaling grupie
-- Możliwość wydeployowania rowiązania w dowolnym regionie bez koniecznośći grzebania w kodzie (w tej chwili należy podmienić region wraz z AMI ID w `packer/jenkins.json` orac `packer/slave.json` oraz w `terraform/config.tf`)
-- Security hardening (security grupy, credentiale do demo aplikacji podawane po pomocą variables itp.)
+- Możliwość wydeployowania rowiązania w dowolnym regionie bez koniecznośći grzebania w kodzie (w tej chwili należy podmienić region wraz z AMI ID w `packer/jenkins.json`, `packer/slave.json` oraz w `terraform/config.tf`)
+- Security hardening (security grupy, credentiale do demo aplikacji podawane za pomocą variables itp.)
 - Przeniesienie części rzeczy z userdata do Ansibla
