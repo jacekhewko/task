@@ -2,7 +2,7 @@
 
 Na wstępie chcę podziękować za interesujące zadanie. O dziwo nie miałem przydatnych templatek więc byłem zmuszony nieco ruszyć głową i napisać 90% kodu od zera. I bardzo się z tego powodu cieszę.
 
-Muszę zaznaczyć, że miałem naprawdę mało czasu na wykonanie tego zadania (30 minut dziennie to max mojego wolnego czasu w tym momencie) - co nie zmienia faktu, że sprawiło mi to przyjemność.
+Muszę zaznaczyć, że miałem naprawdę mało czasu na wykonanie tego zadania (30/40 minut dziennie to max mojego wolnego czasu w tym miesiącu) - co nie zmienia faktu, że sprawiło mi to przyjemność.
 
 Z tego też powodu nie wszystko jest tak rozwiązane, jakbym sobie tego życzył (patrz: TODO list). W tym momencie aplikacja jest deployowana w dockerze stojącym na jednym z workerów Jenkinsa. Do idealnego rozwiązania brakuje niewiele, ale potrzeba na to więcej czasu.
 
