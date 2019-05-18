@@ -1,0 +1,24 @@
+[
+    {
+      "name": "ghost",
+      "image": "repo_url",
+      "cpu": 512,
+      "memory": 1024,
+      "networkMode": "awsvpc",
+      "essential": true,
+      "logConfiguration": {
+          "logDriver": "awslogs",
+          "options": {
+            "awslogs-group": "/ecs/app",
+            "awslogs-region": "eu-west-1",
+            "awslogs-stream-prefix": "ecs"
+          }
+      },
+      "portMappings": [
+        {
+          "containerPort": 2368,
+          "hostPort": 2368
+        }
+      ]
+    }
+  ]

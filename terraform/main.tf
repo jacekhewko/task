@@ -69,6 +69,8 @@ data "template_file" "user_data_slave" {
   template = "${file("${path.module}/userdata/jenkins-slave.tpl")}"
   vars {
     jenkins_url = "${aws_instance.jenkins_master.private_ip}"
+    sentry_pass = "${var.sentry_pass}"
+    sentry_login = "${var.sentry_login}"
   }
 }
 

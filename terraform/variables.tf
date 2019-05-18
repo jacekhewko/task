@@ -37,3 +37,14 @@ variable "jenkins_password" {
 variable "jenkins_credentials_id" {
     default = ""
 }
+
+variable "sentry_pass" {
+}
+
+variable "sentry_login" {
+}
+
+variable "ecs_task_execution_role" {
+  description = "Role arn for the ecsTaskExecutionRole"
+  default     = "arn:aws:iam::account_id:role/ecsTaskExecutionRole"
+}
