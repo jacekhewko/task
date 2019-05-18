@@ -1,13 +1,3 @@
-## Hej Tooploox! :)
-
-Na wstępie chcę podziękować za interesujące zadanie. O dziwo nie miałem przydatnych templatek więc byłem zmuszony nieco ruszyć głową i napisać 90% kodu od zera. I bardzo się z tego powodu cieszę.
-
-Muszę zaznaczyć, że miałem naprawdę mało czasu na wykonanie tego zadania (30 minut dziennie to max mojego wolnego czasu w tym momencie) - co nie zmienia faktu, że sprawiło mi to przyjemność.
-
-Z tego też powodu nie wszystko jest tak rozwiązane, jakbym sobie tego życzył (patrz: TODO list). W tym momencie aplikacja jest deployowana w dockerze stojącym na jednym z workerów Jenkinsa. Do idealnego rozwiązania brakuje niewiele, ale potrzeba na to więcej czasu.
-
-To rozwiązanie celowo nie zawsze jest zgodne z ogólnymi zasadami bezpieczeństwa oraz nie zawsze wpasowuje się w konwencję best practice. Jako, że jest to zadanie rekrutacyjne, moim głównym celem było zrobienie tego tak, aby móc zaprezentować Wam to w jak najprostszy sposób - stąd część rzeczy nie jest zabezpieczonych hasłem, inne rzeczy są nieco uproszczone, a jeszcze gdzie indziej hasła mogą być widoczne "na zewnątrz" - właśnie ze względu na to, że jest to tylko i wyłącznie "prezentacja" i nigdy nie powinna w takiej formie trafić na "produkcję".
-
 ## Wymagania
 - aws cli
 - terraform
@@ -36,7 +26,6 @@ Rozwiązanie docelowo jest deployowane na AWS w regionie Irlandia, korzystając 
 - Aplikacja Sentry zostaje wydeployowana do kontenerów wraz z Redisem oraz PostgreSQL za pomocą docker-compose (przy użyciu `docker-compose.yml` z tego repo)
 
 ## TODO list
-### (docelowo chciałbym aby tak funkcjonowało to rozwiązanie, jednak jest to niemożliwe ze względu na ograniczony czas jaki mogę obecnie poświęcić na to zadanie)
 - Udoskonalenie pipeline (m. inn. zapisanie obrazu apki do własnego Docker Registry po jej wkonfugurowaniu)
 - Wydeployowanie tej aplikacji do Elastic Container Service na AWS, wykorzystując również ECR
 - Slavy Jenkinsa w autoscaling grupie
