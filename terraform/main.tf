@@ -29,6 +29,7 @@ resource "aws_instance" "jenkins_master" {
   key_name               = "${var.key_name}"
   vpc_security_group_ids = ["${aws_security_group.jenkins.id}"]
   subnet_id              = "${aws_subnet.main.id}"
+  iam_instance_profile = "${aws_iam_instance_profile.ecs.id}"
   user_data = "${file("${path.module}/userdata/jenkins-master.tpl")}"
   associate_public_ip_address = true
 
@@ -41,6 +42,12 @@ resource "aws_instance" "jenkins_master" {
     Name   = "jenkins_master"
     Tool   = "Terraform"
   }
+  provisioner "local-exec" {
+    command = "echo ${data.aws_ami.jenkins-master.image_id} >> ${path.module}/metadata/master-ami-id.txt"
+  }
+    provisioner "local-exec" {
+    command = "echo ${data.aws_ami.jenkins-slave.image_id} >> ${path.module}/metadata/slave-ami-id.txt"
+  }
 }
 
 # Slave "general builds"
@@ -50,6 +57,7 @@ resource "aws_instance" "jenkins_slave" {
   key_name               = "${var.key_name}"
   vpc_security_group_ids = ["${aws_security_group.jenkins.id}"]
   subnet_id              = "${aws_subnet.main.id}"
+  iam_instance_profile = "${aws_iam_instance_profile.ecs.id}"
   user_data = "${data.template_file.user_data_slave.rendered}"
   associate_public_ip_address = true
   depends_on = ["aws_instance.jenkins_master"]
@@ -81,6 +89,7 @@ resource "aws_instance" "jenkins_slave2" {
   key_name               = "${var.key_name}"
   vpc_security_group_ids = ["${aws_security_group.jenkins.id}"]
   subnet_id              = "${aws_subnet.main.id}"
+  iam_instance_profile = "${aws_iam_instance_profile.ecs.id}"
   user_data = "${data.template_file.user_data_slave2.rendered}"
   associate_public_ip_address = true
   depends_on = ["aws_instance.jenkins_slave"]
