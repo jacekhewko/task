@@ -4,5 +4,3 @@
     name: jenkins
     enabled: yes
     state: restarted
-
-    

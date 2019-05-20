@@ -79,6 +79,7 @@ data "template_file" "user_data_slave" {
     jenkins_url = "${aws_instance.jenkins_master.private_ip}"
     sentry_pass = "${var.sentry_pass}"
     sentry_login = "${var.sentry_login}"
+    repository_url = "${aws_ecr_repository.repo.repository_url}"
   }
 }
 

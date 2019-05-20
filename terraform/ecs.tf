@@ -5,7 +5,7 @@ resource "aws_ecr_repository" "repo" {
 
 # ECS Cluster
 resource "aws_ecs_cluster" "main" {
-  name = "ghost"
+  name = "app"
 
 tags {
     Name = "Test ECS"
@@ -13,14 +13,17 @@ tags {
 }
 
 # Task definition json
-data "template_file" "definition" {
+data "template_file" "app" {
   template = "${file("templates/app.json")}"
-
+  vars {
+    repository_url = "${aws_ecr_repository.repo.repository_url}"
+    app_version = "${var.app_version}"
+  }
 }
 
 ## Task definition
-resource "aws_ecs_task_definition" "task_ghost_def" {
-  family                   = "ghost-task"
+resource "aws_ecs_task_definition" "app" {
+  family                   = "app-task"
 #   execution_role_arn       = "${var.ecs_task_execution_role}"
   network_mode             = "awsvpc"
   requires_compatibilities = ["FARGATE"]
@@ -30,10 +33,11 @@ resource "aws_ecs_task_definition" "task_ghost_def" {
 }
 
 # ECS Service
-resource "aws_ecs_service" "service_ghost" {
-  name            = "ghost"
+resource "aws_ecs_service" "app" {
+  name            = "app"
+  count           = "${var.ecs_service_count}"
   cluster         = "${aws_ecs_cluster.main.id}"
-  task_definition = "${aws_ecs_task_definition.task_ghost_def.arn}"
+  task_definition = "${aws_ecs_task_definition.task_app_def.arn}"
   desired_count   = "1"
   launch_type     = "FARGATE"
 
@@ -44,9 +48,9 @@ resource "aws_ecs_service" "service_ghost" {
   }
 
 #   load_balancer {
-#     target_group_arn = "${aws_alb_target_group.tg_ghost.id}"
-#     container_name   = "ghost"
-#     container_port   = "${var.ghost_port}"
+#     target_group_arn = "${aws_alb_target_group.tg_app.id}"
+#     container_name   = "app"
+#     container_port   = "${var.app_port}"
 #   }
   
 #  depends_on = [
@@ -56,16 +60,16 @@ resource "aws_ecs_service" "service_ghost" {
 }
 
 # Logs
-resource "aws_cloudwatch_log_group" "ghost_log_group" {
-  name              = "/ecs/ghost"
+resource "aws_cloudwatch_log_group" "app_log_group" {
+  name              = "/ecs/app"
   retention_in_days = 30
 
   tags {
-    Name = "ghost-log-group"
+    Name = "app-log-group"
   }
 }
 
-resource "aws_cloudwatch_log_stream" "ghost_log_stream" {
-  name           = "ghost-log-stream"
-  log_group_name = "${aws_cloudwatch_log_group.ghost_log_group.name}"
+resource "aws_cloudwatch_log_stream" "app_log_stream" {
+  name           = "app-log-stream"
+  log_group_name = "${aws_cloudwatch_log_group.app_log_group.name}"
 }

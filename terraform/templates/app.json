@@ -1,7 +1,7 @@
 [
     {
-      "name": "ghost",
-      "image": "repo_url",
+      "name": "app",
+      "image": "${REPOSITORY_URL}:${APP_VERSION}",
       "cpu": 512,
       "memory": 1024,
       "networkMode": "awsvpc",

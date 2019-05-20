@@ -22,7 +22,11 @@ pipeline {
     }
     stage('Building image') {
       steps{
-        echo "TO DO"
+        sh """
+        sudo docker tag $(sudo docker ps -aqf "name=containername") \$REPOSITORY_URL/sentry
+        sudo eval $(sudo aws ecr get-login --region eu-west-1)
+        sudo docker push \$REPOSITORY_URL/sentry
+        """
       }
     }
   }

@@ -4,3 +4,5 @@
   become_user: root
   roles:
     - slave
+    - terraform
+    - docker

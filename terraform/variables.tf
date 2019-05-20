@@ -48,3 +48,11 @@ variable "ecs_task_execution_role" {
   description = "Role arn for the ecsTaskExecutionRole"
   default     = "arn:aws:iam::account_id:role/ecsTaskExecutionRole"
 }
+
+variable "ecs_service_count" {
+    default = "0"
+}
+
+variable "app_version" {
+    default = "1"
+}

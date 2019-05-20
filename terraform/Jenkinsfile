@@ -1,0 +1,19 @@
+pipeline {
+  agent { label 'general-build' }
+  stages {
+    stage('Cloning Git') {
+      steps {
+        sh 'sudo rm -rf tooploox'
+        sh 'git clone https://github.com/jacekhewko/tooploox.git'
+      }
+    }
+    stage('Deploying ECS') {
+      steps{
+        sh """
+        cd terraform
+        terraform apply -target aws_ecs_service.app -var ecs_service_count="1" -var app_version=${app_version}
+        """
+      }
+    }
+  }
+}

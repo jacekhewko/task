@@ -11,6 +11,7 @@ sudo service docker start
 sudo service docker enable
 sudo echo export APP_PASS="${sentry_pass}" | sudo tee -a /etc/profile > /dev/null
 sudo echo export APP_LOGIN="${sentry_login}" | sudo tee -a /etc/profile > /dev/null
+sudo echo export REPOSITORY_URL="${repository_url}" | sudo tee -a /etc/profile > /dev/null
 source /etc/profile
 sudo sleep 120
 sudo curl http://${jenkins_url}:8080/jnlpJars/jenkins-cli.jar -o /tmp/jenkins-cli.jar
