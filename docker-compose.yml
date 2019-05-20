@@ -4,7 +4,7 @@ services:
     container_name: sentry
     image: sentry:latest
     env_file:
-      - .env
+      - .variables
     ports:
       - '9000:9000'
     depends_on:
@@ -17,7 +17,7 @@ services:
     image: sentry:latest
     command: run cron
     env_file:
-      - .env
+      - .variables
     depends_on:
       - db
       - redis
@@ -26,7 +26,7 @@ services:
     image: sentry:latest
     command: run worker
     env_file:
-      - .env
+      - .variables
     depends_on:
       - db
       - redis
